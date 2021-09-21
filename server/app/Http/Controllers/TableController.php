@@ -15,7 +15,7 @@ class TableController extends Controller
      */
     public function index()
     {
-        $tables = Table::all();
+        $tables = Table::orderByDesc("id")->get();
         return $tables;
     }
 
@@ -42,6 +42,7 @@ class TableController extends Controller
         $table = new Table();
         $table->code = rand(100, 999) . $person->id;
         $table->person_id = $person->id;
+        $table->user_id = $request["user_id"];
         $table->save();
 
         return ["ok" => true];

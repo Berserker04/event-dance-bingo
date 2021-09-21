@@ -15,7 +15,7 @@ class PersonController extends Controller
      */
     public function index()
     {
-        $peeple = Person::with("tables")->get();
+        $peeple = Person::with("tables")->orderByDesc("id")->get();
         return $peeple;
     }
 

@@ -19,6 +19,7 @@ class CreateTablesTable extends Migration
             $table->integer("person_id");
             $table->string("paid")->default("No pagado"); //Pagado
             $table->integer("state")->default(1);
+            $table->integer("user_id");
             $table->timestamps();
         });
     }
