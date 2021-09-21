@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Person;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PersonController extends Controller
@@ -16,6 +17,12 @@ class PersonController extends Controller
     {
         $peeple = Person::with("tables")->get();
         return $peeple;
+    }
+
+    public function listUserOp()
+    {
+        $users = User::all();
+        return $users;
     }
 
     /**
@@ -95,7 +102,7 @@ class PersonController extends Controller
     public function changeState($id)
     {
         $peeple = Person::find($id);
-        $peeple->state = $peeple->state == 1 ? 0 : 1; 
+        $peeple->state = $peeple->state == 1 ? 0 : 1;
         $peeple->save();
         return $peeple;
     }

@@ -9,7 +9,8 @@ class Person extends Model
 {
     use HasFactory;
 
-    public function tables(){
+    public function tables()
+    {
         return $this->hasMany(Table::class);
     }
 }
