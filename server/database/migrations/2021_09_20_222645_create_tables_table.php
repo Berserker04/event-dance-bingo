@@ -15,8 +15,9 @@ class CreateTablesTable extends Migration
     {
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
-            $table->integer("code");
-            $table->integer("sale_id");
+            $table->integer("code")->unique();
+            $table->integer("person_id");
+            $table->string("paid")->default("No pagado"); //Pagado
             $table->integer("state")->default(1);
             $table->timestamps();
         });

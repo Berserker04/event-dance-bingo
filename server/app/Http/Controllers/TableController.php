@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sale;
+use App\Models\Person;
 use App\Models\Table;
 use Illuminate\Http\Request;
 
-class SaleController extends Controller
+class TableController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,8 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sales = Sale::with("tables")->get();
-
-        return $sales;
+        $tables = Table::all();
+        return $tables;
     }
 
     /**
@@ -38,19 +37,12 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        $sale = Sale::create([
-            "fullName" => "Carlos",
-            "amountTable" => 2
-        ]);
+        $person = Person::find($request["id"]);
 
-        for ($i = 0; $i < $sale->amountTable; $i++) {
-            $table = new Table();
-
-            $table->code = rand(100, 999) . $sale->id;
-            $table->sale_id = $sale->id;
-
-            $table->save();
-        }
+        $table = new Table();
+        $table->code = rand(100, 999) . $person->id;
+        $table->person_id = $person->id;
+        $table->save();
 
         return ["ok" => true];
     }
@@ -86,7 +78,11 @@ class SaleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $table = Table::find($id);
+        $table->paid = $table->paid == "Pagado" ? "No pagado" : "Pagado";
+        $table->save();
+
+        return ["ok" => true];
     }
 
     /**
@@ -97,6 +93,16 @@ class SaleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $table = Table::find($id);
+        $table->delete();
+        return ["ok" => true];
+    }
+
+    public function changeState($id)
+    {
+        $table = Table::find($id);
+        $table->state = $table->state == 1 ? 0 : 1;
+        $table->save();
+        return $table;
     }
 }
