@@ -37,11 +37,11 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
-        $person = Person::find($request["id"]);
+        // $person = Person::find($request["id"]);
 
         $table = new Table();
-        $table->code = rand(100, 999) . $person->id;
-        $table->person_id = $person->id;
+        $table->code = rand(100, 999) . $request["person_id"];
+        $table->person_id = $request["person_id"];
         $table->user_id = $request["user_id"];
         $table->save();
 
