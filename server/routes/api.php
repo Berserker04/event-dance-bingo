@@ -11,6 +11,7 @@ Route::get('personas/op', [PersonController::class, "listUserOp"]);
 Route::resource('personas', PersonController::class);
 
 Route::put('tablas/state/{id}', [TableController::class, "changeState"]);
+Route::get('tablas/statisticsSale', [TableController::class, "statisticsSale"]);
 Route::resource('tablas', TableController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

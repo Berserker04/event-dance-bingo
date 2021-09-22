@@ -106,4 +106,19 @@ class TableController extends Controller
         $table->save();
         return $table;
     }
+
+    public function statisticsSale()
+    {
+        $totalTable = 80;
+        $compromised = Table::count("id");
+        $paid = Table::where("paid", "=", "Pagado")->count();
+        $noPaid = Table::where("paid", "=", "No pagado")->count();
+
+        return [
+            "totalTable" => $totalTable,
+            "compromised" => $compromised,
+            "paid" => $paid,
+            "noPaid" => $noPaid,
+        ];
+    }
 }
